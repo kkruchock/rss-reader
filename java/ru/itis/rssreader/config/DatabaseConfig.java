@@ -23,7 +23,7 @@ public class DatabaseConfig {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:postgresql://localhost:5432/rssreader");
         config.setUsername("postgres");
-        config.setPassword("_Policy25_");
+        config.setPassword("");
         config.setDriverClassName("org.postgresql.Driver");
         config.setMaximumPoolSize(10);
 
