@@ -77,4 +77,17 @@ public class PostRepositoryImpl implements PostRepository {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<Post> findByIdAndUserId(Long postId, Long userId) {
+        String sql = "SELECT p.* FROM posts p " +
+                "JOIN rss_sources rs ON p.source_id = rs.id " +
+                "WHERE p.id = ? AND rs.user_id = ?";
+        try {
+            Post post = jdbcTemplate.queryForObject(sql, postRowMapper, postId, userId);
+            return Optional.ofNullable(post);
+        } catch (EmptyResultDataAccessException e) {
+            return Optional.empty();
+        }
+    }
 }

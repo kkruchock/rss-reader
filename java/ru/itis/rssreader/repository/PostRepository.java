@@ -15,4 +15,6 @@ public interface PostRepository {
     long countByUserId(Long userId);
 
     Optional<Post> findById(Long id);
+
+    Optional<Post> findByIdAndUserId(Long postId, Long userId);
 }
