@@ -16,7 +16,6 @@ public class UserRowMapper  implements RowMapper<User> {
                 .id(rs.getLong("id"))
                 .username(rs.getString("username"))
                 .passwordHash(rs.getString("password_hash"))
-                .salt(rs.getString("salt"))
                 .createdAt(rs.getTimestamp("created_at") != null
                         ? rs.getTimestamp("created_at").toLocalDateTime()
                         : null)

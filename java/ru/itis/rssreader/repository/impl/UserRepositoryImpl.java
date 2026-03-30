@@ -26,13 +26,12 @@ public class UserRepositoryImpl implements UserRepository {
     public User save(User user) {
         String sql = "INSERT INTO users " +
                 "(username, password_hash, password_salt)" +
-                "VALUES (?, ?, ?)";
+                "VALUES (?, ?)";
 
         jdbcTemplate.update(
                 sql,
                 user.getUsername(),
-                user.getPasswordHash(),
-                user.getSalt());
+                user.getPasswordHash());
 
         return findByUsername(user.getUsername())
                 .orElseThrow(() -> new RuntimeException("Failed to save user"));
