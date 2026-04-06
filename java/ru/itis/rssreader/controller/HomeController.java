@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/feed")
     public String home(Model model) {
         model.addAttribute("message", "rss v 0.1");
         return "home";

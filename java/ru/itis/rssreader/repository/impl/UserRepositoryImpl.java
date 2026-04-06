@@ -25,7 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User save(User user) {
         String sql = "INSERT INTO users " +
-                "(username, password_hash, password_salt)" +
+                "(username, password_hash)" +
                 "VALUES (?, ?)";
 
         jdbcTemplate.update(
