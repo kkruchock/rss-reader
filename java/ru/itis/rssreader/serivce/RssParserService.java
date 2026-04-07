@@ -26,12 +26,6 @@ public class RssParserService {
         this.postRepository = postRepository;
     }
 
-    /**
-     * Парсит RSS фид и сохраняет новые посты
-     * @param feedUrl URL RSS ленты
-     * @param sourceId ID источника в БД
-     * @return список новых сохраненных постов
-     */
     public List<Post> fetchAndParseFeed(String feedUrl, Long sourceId) {
         List<Post> newPosts = new ArrayList<>();
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Лента новостей - RSS Reader</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" />
+</head>
+<body>
+<div class="container">
+    <h1>Лента новостей</h1>
+
+    <div class="nav">
+        <a th:href="@{/sources}">Мои источники</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </div>
+
+    <!-- Если нет источников -->
+    <div th:if="${not hasSources}" class="info">
+        <p>У вас пока нет RSS источников.</p>
+        <p>Добавьте источник в разделе <a th:href="@{/sources}">"Мои источники"</a></p>
+    </div>
+
+    <!-- Если есть источники, но нет постов -->
+    <div th:if="${hasSources and #lists.isEmpty(posts)}" class="info">
+        <p>Постов пока нет. Обновите страницу, чтобы загрузить посты.</p>
+    </div>
+
+    <!-- Список постов -->
+    <div th:if="${not #lists.isEmpty(posts)}">
+        <div th:each="post : ${posts}" class="post-item">
+            <h3>
+                <a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}">Заголовок</a>
+            </h3>
+            <div class="post-source">Источник: <span th:text="${post.sourceName}">Название</span></div>
+            <div class="post-date" th:if="${post.publishedAt != null}">
+                Опубликовано: <span th:text="${#temporals.format(post.publishedAt, 'dd.MM.yyyy HH:mm')}">дата</span>
+            </div>
+        </div>
+
+        <!-- Пагинация -->
+        <div th:if="${totalPages > 1}" class="pagination">
+            <a th:if="${currentPage > 0}" th:href="@{/feed(page=${currentPage - 1})}">← Предыдущая</a>
+            <span>Страница <span th:text="${currentPage + 1}"/> из <span th:text="${totalPages}"/></span>
+            <a th:if="${currentPage + 1 < totalPages}" th:href="@{/feed(page=${currentPage + 1})}">Следующая →</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

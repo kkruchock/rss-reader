@@ -26,8 +26,8 @@ public class RssSourceRepositoryImpl implements RssSourceRepository {
 
     @Override
     public RssSource save(RssSource source) {
-        String sql = "INSERT INTO rss_source (user_id, name, url) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, source.getUserId(), source. getName(), source.getUrl(), rssSourceRowMapper);
+        String sql = "INSERT INTO rss_sources (user_id, name, url) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, source.getUserId(), source. getName(), source.getUrl());
 
         return findByUserIdAndUrl(source.getUserId(), source.getUrl());
     }

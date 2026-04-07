@@ -27,7 +27,6 @@ public class FeedService {
     }
 
     public List<Post> getUserFeed(Long userId, int page) {
-
         List<RssSource> sources = rssSourceService.getUserSources(userId);
 
         for (RssSource source : sources) {
@@ -35,7 +34,9 @@ public class FeedService {
         }
 
         int offset = page * PAGE_SIZE;
-        return postRepository.findByUserIdPaginated(userId, offset, PAGE_SIZE);
+        List<Post> posts = postRepository.findByUserIdPaginated(userId, offset, PAGE_SIZE);
+
+        return posts;
     }
 
     public long getTotalPostsCount(Long userId) {

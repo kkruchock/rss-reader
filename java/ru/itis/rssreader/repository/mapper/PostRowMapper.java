@@ -15,6 +15,7 @@ public class PostRowMapper implements RowMapper<Post> {
         return Post.builder()
                 .id(rs.getLong("id"))
                 .sourceId(rs.getLong("source_id"))
+                .sourceName(rs.getString("source_name"))
                 .title(rs.getString("title"))
                 .description(rs.getString("description"))
                 .link(rs.getString("link"))

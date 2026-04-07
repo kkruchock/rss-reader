@@ -48,7 +48,7 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public List<Post> findByUserIdPaginated(Long userId, int offset, int limit) {
-        String sql = "SELECT p.* FROM posts p " +
+        String sql = "SELECT p.*, rs.name as source_name FROM posts p " +
                 "JOIN rss_sources rs ON p.source_id = rs.id " +
                 "WHERE rs.user_id = ? " +
                 "ORDER BY p.published_at DESC, p.created_at DESC " +
@@ -80,7 +80,7 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Optional<Post> findByIdAndUserId(Long postId, Long userId) {
-        String sql = "SELECT p.* FROM posts p " +
+        String sql = "SELECT p.*, rs.name as source_name FROM posts p " +
                 "JOIN rss_sources rs ON p.source_id = rs.id " +
                 "WHERE p.id = ? AND rs.user_id = ?";
         try {

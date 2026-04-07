@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои источники - RSS Reader</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" />
+</head>
+<body>
+<div class="container">
+    <h1>Мои RSS источники</h1>
+
+    <div class="nav">
+        <a th:href="@{/feed}">Лента</a>
+        <a th:href="@{/sources}">Мои источники</a>
+        <a th:href="@{/logout}">Выйти</a>
+    </div>
+
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <h2>Добавить источник</h2>
+    <form th:action="@{/sources}" th:object="${rssSourceDto}" method="post">
+        <div>
+            <label>Название:</label>
+            <input type="text" th:field="*{name}" required/>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></span>
+        </div>
+        <div>
+            <label>URL RSS:</label>
+            <input type="url" th:field="*{url}" required/>
+            <span th:if="${#fields.hasErrors('url')}" th:errors="*{url}" class="error"></span>
+        </div>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <h2>Мои источники</h2>
+    <table th:if="${not #lists.isEmpty(sources)}">
+        <tr>
+            <th>Название</th>
+            <th>URL</th>
+        </tr>
+        <tr th:each="source : ${sources}">
+            <td th:text="${source.name}">共<
+            <td th:text="${source.url}">共<
+        </tr>
+    </table>
+    <p th:if="${#lists.isEmpty(sources)}">У вас пока нет добавленных источников</p>
+</div>
+</body>
+</html>

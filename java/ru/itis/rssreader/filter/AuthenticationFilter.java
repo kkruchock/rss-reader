@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class AuthenticationFilter implements Filter {
 
-    private static final String[] PUBLIC_PATHS = {"/login", "/register", "/css"};
+    private static final String[] PUBLIC_PATHS = {"/login", "/register", "/css/"};
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

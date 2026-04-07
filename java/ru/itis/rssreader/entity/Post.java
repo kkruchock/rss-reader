@@ -15,6 +15,7 @@ public class Post {
 
     private Long id;
     private Long sourceId;
+    private String sourceName;
     private String title;
     private String description;
     private String link;
